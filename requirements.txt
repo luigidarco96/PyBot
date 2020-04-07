@@ -3,3 +3,4 @@ gtts
 pyaudio
 pygame
 pocketsphinx
+googletrans

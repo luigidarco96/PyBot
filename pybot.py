@@ -1,24 +1,34 @@
-from speech_to_text import listener
-from text_to_speech import talk
-from action_handler import ActionHandler
+from speaker import Speaker
+from listener import Listener
+from action_manager import ActionManager
 
 
 class PyBot(object):
     name = 'PyBot'
-    username = ''
     wake_words = ['hey {}'.format(name)]
-    action_handler = ActionHandler(speaker=talk)
+    language = 'en_EN'
+    speaker = None
+    listener = None
+    action_handler = None
 
-    def __init__(self, name='PyBot'):
+    def __init__(self, name='PyBot', language='en_EN'):
         self.name = name
-        print("Hello, I'm {}. How can I help you?".format(name))
-        talk("Hello, I'm {}. How can I help you?".format(name))
+        self.language = language
+        self.speaker = Speaker(language=language)
+        self.listener = Listener(language=language)
+        self.action_handler = ActionManager(speaker=self.speaker, language=language)
+
+        self.__start()
+
+    def __start(self):
+        self.speaker.talk("Hello, I'm {}".format(self.name))
         while True:
-            data = listener()
 
             # if self.__handle_wake_up(data):
-                # data = data.replace("hey pybot", "")
-                 #self.action_handler(data)
+            # data = data.replace("hey pybot", "")
+            # self.action_handler(data)
+
+            data = self.listener.listen()
             self.action_handler.handle_decision(data)
 
     def __handle_wake_up(self, text):
@@ -29,11 +39,3 @@ class PyBot(object):
                 return True
 
         return False
-
-
-
-
-
-
-
-

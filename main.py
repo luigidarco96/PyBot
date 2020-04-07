@@ -1,3 +1,3 @@
 from pybot import PyBot
 
-bot = PyBot()
+bot = PyBot(language='it_IT')
