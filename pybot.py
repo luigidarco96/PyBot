@@ -16,9 +16,10 @@ class PyBot(object):
         while True:
             data = listener()
 
-            if self.__handle_wake_up(data):
-                data = data.replace("hey pybot", "")
-                self.action_handler(data)
+            # if self.__handle_wake_up(data):
+                # data = data.replace("hey pybot", "")
+                 #self.action_handler(data)
+            self.action_handler.handle_decision(data)
 
     def __handle_wake_up(self, text):
         text = text.lower()
@@ -28,7 +29,6 @@ class PyBot(object):
                 return True
 
         return False
-
 
 
 

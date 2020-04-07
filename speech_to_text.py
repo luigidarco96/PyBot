@@ -1,16 +1,19 @@
 import speech_recognition as sr
 
 r = sr.Recognizer()
+mic = sr.Microphone()
 
 
 def listener():
-    with sr.Microphone() as source:
+
+    with mic as source:
         print("I'm listening...")
+        r.adjust_for_ambient_noise(source)
         audio = r.listen(source)
 
     data = ""
     try:
-        data = r.recognize_google(audio)
+        data = r.recognize_sphinx(audio)
         print("You said: " + data)
     except sr.UnknownValueError:
         print("Google Speech Recognition did not understand audio")
