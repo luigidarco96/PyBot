@@ -2,5 +2,11 @@ SpeechRecognition
 gtts
 pyaudio
 pygame
-pocketsphinx
 googletrans
+bluepy
+pycrypto
+argparse
+flask
+flask-restplus
+Werkzeug==0.16.1
+crc16
