@@ -7,7 +7,7 @@ import sys
 
 class PyBot(object):
     name = 'PyBot'
-    wake_words = ['hey {}'.format(name)]
+    wake_words = ['pybot']
     language = 'en_EN'
     speaker = None
     listener = None
@@ -18,7 +18,7 @@ class PyBot(object):
         self.name = name
         self.language = language
         self.speaker = Speaker(language=language)
-        self.listener = Listener(language=language, source=1, audio_file="digital_assistant/AudioCommands.wav")
+        self.listener = Listener(language=language, source=0, audio_file="digital_assistant/AudioCommands.wav")
         self.action_handler = ActionManager(speaker=self.speaker, language=language)
 
         self.__start()
@@ -27,13 +27,11 @@ class PyBot(object):
         self.speaker.talk("Hello, I'm {}".format(self.name))
         while True:
 
-            # if self.__handle_wake_up(data):
-            # data = data.replace("hey pybot", "")
-            # self.action_handler(data)
-
             data = self.listener.listen()
-            self.action_handler.handle_decision(data)
 
+            # if self.__handle_wake_up(data):
+            self.action_handler.handle_decision(data)
+        
     def __handle_wake_up(self, text):
         text = text.lower()
 

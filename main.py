@@ -1,32 +1,28 @@
-from flask import Flask, render_template
+from flask import Flask
 from api import api
 from api.routes import initialise_routes
 from digital_assistant.pybot import PyBot
 import settings
 from multiprocessing import Process, Queue
-from miband_manager.miband_api import miband_app
-import webbrowser
+from ui_manager.manager import miband_app
+from emotion_manager import handle_emotion
 
 app = Flask(__name__)
 app.register_blueprint(miband_app)
 
-'''
-@app.route("/home")
-def home():
-    steps = 10
-    meters = 20
-    calorie = 50
-    heart_rate = 72
-    return render_template("home.html", steps=steps, meters=meters, calorie=calorie, heart_rate=heart_rate)
-'''
 
 def init_pybot():
-    bot = PyBot(language='en_EN')
+    bot = PyBot(language=settings.PYBOT_LANGUAGE)
 
 
 def init_miband():
-    chrome_path = '/usr/lib/chromium-browser/chromium-browser'
-    webbrowser.get(chrome_path).open('http://0.0.0.0/home')
+    print('ok')
+    # webview.create_window('PyBot', 'http://0.0.0.0/hello')
+    # webview.start()
+
+
+def init_emotion():
+    handle_emotion()
 
 
 def configure_app(flask_app):
@@ -75,11 +71,22 @@ class AppWorker(Process):
         init_pybot()
 
 
+class EmotionWorker(Process):
+
+    def __init__(self):
+        super(EmotionWorker, self).__init__()
+
+    def run(self):
+        print("===== Start Emotion Recognition =====")
+        init_emotion()
+
+
 if __name__ == "__main__":
     request_queue = Queue()
 
     PyBotWorker().start()
     AppWorker().start()
     MiBandWorker().start()
+    EmotionWorker().start()
 
 

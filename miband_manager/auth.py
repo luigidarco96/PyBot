@@ -278,8 +278,7 @@ class MiBand3(Peripheral):
         steps = struct.unpack('h', a[1:3])[0] if len(a) >= 3 else None
         meters = struct.unpack('h', a[5:7])[0] if len(a) >= 7 else None
         fat_gramms = struct.unpack('h', a[2:4])[0] if len(a) >= 4 else None
-        calories = 0
-        # callories = struct.unpack('b', a[9])[0] if len(a) >= 10 else None
+        calories = a[7] if len(a) >= 10 else None
         return {
             "steps": steps,
             "meters": meters,
@@ -448,3 +447,26 @@ class MiBand3(Peripheral):
             trigger = b'\x01\x01' + ts + b'\x00\x08'
             self._char_fetch.write(trigger, False)
             self.active = True
+
+    def get_heart_rate(self, heart_measure_callback=None):
+            char_m = self.svc_heart.getCharacteristics(UUIDS.CHARACTERISTIC_HEART_RATE_MEASURE)[0]
+            char_d = char_m.getDescriptors(forUUID=UUIDS.NOTIFICATION_DESCRIPTOR)[0]
+            char_ctrl = self.svc_heart.getCharacteristics(UUIDS.CHARACTERISTIC_HEART_RATE_CONTROL)[0]
+
+            if heart_measure_callback:
+                self.heart_measure_callback = heart_measure_callback
+
+            char_sensor = self.svc_1.getCharacteristics(UUIDS.CHARACTERISTIC_SENSOR)[0]
+
+            # stop heart monitor continues & manual
+            char_ctrl.write(b'\x15\x02\x00', True)
+            char_ctrl.write(b'\x15\x01\x00', True)
+            # char_sens_d1.write(b'\x01\x00', True)
+            # enabling accelerometer & heart monitor raw data notifications
+            char_sensor.write(b'\x01\x03\x19')
+            # IMO: enable heart monitor notifications
+            char_d.write(b'\x01\x00', True)
+            # start hear monitor continues
+            char_ctrl.write(b'\x15\x01\x01', True)
+            # WTF
+            char_sensor.write(b'\x02')

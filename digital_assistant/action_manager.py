@@ -1,6 +1,7 @@
 from digital_assistant.voice_commands import \
     VoiceCommandEnglish, VoiceCommandItalian, VoiceCommandChinese, VoiceCommandSpanish
 from api.routes.movement import MoveForward, MoveBackward, MoveLeftward, MoveRightward
+from .music_player import play_music
 
 
 class ActionManager(object):
@@ -16,7 +17,7 @@ class ActionManager(object):
             self.command_list = VoiceCommandItalian
         if language == 'es_ES':
             self.command_list = VoiceCommandSpanish
-        if language == 'zh':
+        if language == 'zh-cn':
             self.command_list = VoiceCommandChinese
 
     def handle_decision(self, data):
@@ -55,5 +56,10 @@ class ActionManager(object):
             return
 
         if any(x in data for x in self.command_list.play_cmd):
-            self.speaker.talk("La la la la la la la la la")
+            play_music()
             return
+
+        if any(x in data for x in self.command_list.fitness_data):
+            self.speaker.talk("Your fitness data are:")
+            return
+

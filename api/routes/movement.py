@@ -22,7 +22,6 @@ class MoveForward(Resource):
 
         distance = distance_sensor.read_mm()
         while distance > min_distance:
-            print("Distance: {}".format(distance))
             try:
                 distance = distance_sensor.read_mm()
                 time.sleep(.1)

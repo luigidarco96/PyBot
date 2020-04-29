@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Py Bot</title>
-    <meta http-equiv="refresh" content="5" >
+    <meta http-equiv="refresh" content="30" >
 </head>
 <style>
 
@@ -14,7 +14,7 @@ td, th {
 }
 </style>
 <body>
-<h1 style="color: #5e9ca0; text-align:center">Hello I'm&nbsp;<span style="color: #2b2301;">PyBot!</span></h1>
+<h1 style="color: #5e9ca0; text-align:center">Hello {{ name }}, I'm&nbsp;<span style="color: #2b2301;">PyBot!</span></h1>
 
 <h2 style="color: #2e6c80;">Your fitness data:</h2>
 <table>
@@ -37,6 +37,16 @@ td, th {
     </tr>
     </tbody>
 </table>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<form action="/logout">
+    <input type="submit" value="Logout" />
+</form>
 
 </body>
 </html>
