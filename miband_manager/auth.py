@@ -278,7 +278,7 @@ class MiBand3(Peripheral):
         steps = struct.unpack('h', a[1:3])[0] if len(a) >= 3 else None
         meters = struct.unpack('h', a[5:7])[0] if len(a) >= 7 else None
         fat_gramms = struct.unpack('h', a[2:4])[0] if len(a) >= 4 else None
-        calories = a[7] if len(a) >= 10 else None
+        calories = a[9] if len(a) >= 10 else None
         return {
             "steps": steps,
             "meters": meters,

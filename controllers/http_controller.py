@@ -2,7 +2,7 @@ import requests
 from settings import URL_PYSERVER
 import pickle
 
-store_file = 'store.data'
+store_file = 'controllers/store.data'
 
 
 def login(username, password):

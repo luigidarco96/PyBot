@@ -16,7 +16,7 @@ def init_pybot():
 
 
 def init_miband():
-    print('ok')
+    print('')
     # webview.create_window('PyBot', 'http://0.0.0.0/hello')
     # webview.start()
 
@@ -85,7 +85,7 @@ if __name__ == "__main__":
     request_queue = Queue()
 
     PyBotWorker().start()
-    # AppWorker().start()
+    AppWorker().start()
     MiBandWorker().start()
     EmotionWorker().start()
 

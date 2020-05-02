@@ -18,7 +18,7 @@ def handle_emotion():
     while True:
         emotion = get_emotion()
 
-        if emotion is not None:
+        if emotion is not None and emotion != 'neutral':
             Speaker(language=PYBOT_LANGUAGE).talk('it seems you are {}. Can I do something for you?'.format(emotion))
 
         time.sleep(5)

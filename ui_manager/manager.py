@@ -78,7 +78,7 @@ def get_fitness_data():
 def hr_callback(x):
     global heart_rate_value
     heart_rate_value = x
-    print(x)
+    send_data('heart-rates', heart_rate_value)
 
 
 def hr():
