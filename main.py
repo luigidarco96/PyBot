@@ -85,7 +85,7 @@ if __name__ == "__main__":
     request_queue = Queue()
 
     PyBotWorker().start()
-    AppWorker().start()
+    # AppWorker().start()
     MiBandWorker().start()
     EmotionWorker().start()
 

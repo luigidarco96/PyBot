@@ -1,8 +1,6 @@
 from digital_assistant.speaker import Speaker
 from digital_assistant.listener import Listener
 from digital_assistant.action_manager import ActionManager
-import os
-import sys
 
 
 class PyBot(object):

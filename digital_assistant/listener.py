@@ -1,5 +1,6 @@
 import speech_recognition as sr
 import time
+from measurements import speech_timer
 
 class Listener(object):
     language = 'en_EN'
@@ -17,6 +18,7 @@ class Listener(object):
         else:
             self.origin = sr.AudioFile(audio_file)
 
+    @speech_timer
     def listen(self):
         if self.source_type == 0:
             audio = self.__record_from_microphone()

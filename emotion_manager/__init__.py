@@ -7,6 +7,7 @@ import requests
 from settings import URL_PYSERVER
 from digital_assistant.speaker import Speaker
 from settings import PYBOT_LANGUAGE
+from measurements import image_timer
 
 app = Flask(__name__)
 dir_name = os.path.dirname(__file__)
@@ -23,6 +24,7 @@ def handle_emotion():
         time.sleep(5)
 
 
+@image_timer
 def get_emotion():
     with picamera.PiCamera() as camera:
         camera.resolution = (1024, 768)

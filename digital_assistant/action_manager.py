@@ -59,7 +59,8 @@ class ActionManager(object):
             play_music()
             return
 
+        '''
         if any(x in data for x in self.command_list.fitness_data):
             self.speaker.talk("Your fitness data are:")
             return
-
+        '''

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from miband_manager.auth import MiBand3
 from controllers.http_controller import is_auth, login, logout, get_username, send_data
-import json
+import threading
 
 miband_app = Blueprint('', __name__, template_folder="templates")
 miband = None
@@ -16,17 +16,11 @@ def home():
         if miband is None:
             return render_template("home_log.html", name=get_username())
         else:
-            get_heart_rate()
             steps, meters, fatgram, calorie = get_fitness_data()
             global heart_rate_value
-            return render_template("home.html", name=get_username(), steps=steps, meters=meters, calorie=fatgram, heart_rate=heart_rate_value)
+            return render_template("home.html", name=get_username(), steps=steps, meters=meters, calorie=calorie, heart_rate=heart_rate_value)
     else:
         return redirect(url_for('.login_view'))
-
-
-@miband_app.route('/hr')
-def hr():
-    get_heart_rate()
 
 
 @miband_app.route('/login')
@@ -87,8 +81,16 @@ def hr_callback(x):
     print(x)
 
 
+def hr():
+    miband.get_heart_rate(heart_measure_callback=hr_callback)
+
+
 def get_heart_rate():
-    global miband
-    print("Begin")
-    miband.start_raw_data_realtime(heart_measure_callback=hr_callback)
-    print("ENd")
+    thread1 = threading.Thread(target=hr, args=())
+
+    thread1.start()
+
+    thread1.join()
+
+    global heart_rate_value
+    print(heart_rate_value)

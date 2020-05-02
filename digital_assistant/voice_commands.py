@@ -7,7 +7,6 @@ class VoiceCommandEnglish(object):
     back_cmd = ['go back']
     stop_cmd = ['stop']
     play_cmd = ['play']
-    fitness_data = ['what are my fitness data', "How are my fitness data"]
 
 
 class VoiceCommandItalian(object):
@@ -19,19 +18,17 @@ class VoiceCommandItalian(object):
     back_cmd = ['vai indietro', 'torna indietro']
     stop_cmd = ['fermati', 'stop']
     play_cmd = ['riproduci']
-    fitness_data = ['Quali sono i miei fitness data', "Come sono i miei fitness data"]
 
 
 class VoiceCommandChinese(object):
     hello_cmd = ['你好']
     how_are_you_cmd = ['你好吗']
     follow_cmd = ["跟着我"]
-    turn_right_cmd = ['turn', 'right']
-    turn_left_cmd = ['turn', 'left']
-    back_cmd = ['go', 'back']
-    stop_cmd = ['stop']
-    play_cmd = ['play']
-    fitness_data = ['what are my fitness data', "How are my fitness data"]
+    turn_right_cmd = ['右转']
+    turn_left_cmd = ['转左']
+    back_cmd = ['回去']
+    stop_cmd = ['停']
+    play_cmd = ['玩']
 
 
 class VoiceCommandSpanish(object):
@@ -43,4 +40,3 @@ class VoiceCommandSpanish(object):
     back_cmd = ['regresas']
     stop_cmd = ['stop', 'paras', 'parate']
     play_cmd = ['play']
-    fitness_data = ['what are my fitness data', "How are my fitness data"]

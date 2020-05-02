@@ -450,6 +450,7 @@ class MiBand3(Peripheral):
 
     def get_heart_rate(self, heart_measure_callback=None):
             char_m = self.svc_heart.getCharacteristics(UUIDS.CHARACTERISTIC_HEART_RATE_MEASURE)[0]
+
             char_d = char_m.getDescriptors(forUUID=UUIDS.NOTIFICATION_DESCRIPTOR)[0]
             char_ctrl = self.svc_heart.getCharacteristics(UUIDS.CHARACTERISTIC_HEART_RATE_CONTROL)[0]
 
@@ -470,3 +471,7 @@ class MiBand3(Peripheral):
             char_ctrl.write(b'\x15\x01\x01', True)
             # WTF
             char_sensor.write(b'\x02')
+
+            self.waitForNotifications(0.5)
+            self._parse_queue()
+

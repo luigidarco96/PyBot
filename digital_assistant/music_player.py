@@ -5,8 +5,9 @@ from pygame import mixer
 import os
 import sys
 
-dir_name = os.path.dirname(sys.modules['__main__'].__file__)
-music_dir = dir_name + "/music"  # change to music
+#dir_name = os.path.dirname(sys.modules['__main__'].__file__)
+#music_dir = dir_name + "/music"
+music_dir = "music"
 onlyfiles = [f for f in listdir(music_dir) if isfile(join(music_dir, f))]
 
 
@@ -22,5 +23,5 @@ def play_music():
     mixer.music.play()
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     play_music()
