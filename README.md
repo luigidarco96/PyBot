@@ -1,5 +1,9 @@
 # PyBot
 
+PyBot is a robot infrastructure that aims to collect data from the user's wristband, to interact with the user and to take decisions according to user's emotion. The interaction with the user is provided using speech and speech recognition facilities.
+
+PyBot is developed in Python and it is designed to run on Raspberry Pi 3.
+
 ## Installation
 
 In this section are described all the steps required to install and deploy the PyBot
